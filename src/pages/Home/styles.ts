@@ -13,3 +13,8 @@ export const MainContainer = styled.main`
     margin-bottom: 5rem;
   }
 `
+export const CardsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3.2rem;
+`
