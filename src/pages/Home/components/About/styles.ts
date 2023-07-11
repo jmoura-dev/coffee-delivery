@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const AboutContainer = styled.div`
   display: flex;
   flex-shrink: 0;
-  margin: 5rem 0;
+  margin: 3rem 0;
   padding: 2rem 0;
 
   background: linear-gradient(

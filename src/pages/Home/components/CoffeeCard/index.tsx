@@ -1,30 +1,72 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { AmountContainer, CoffeeContainer, FooterCard } from './styles'
 
-import CoffeeTradicional from '../../../../assets/Expresso.svg'
+// import CoffeeTradicional from '../../../../assets/Expresso.svg'
 import { NavLink } from 'react-router-dom'
+import { useState } from 'react'
 
-export function CoffeeCard() {
+export interface CoffeeProps {
+  id: string
+  name: string
+  description: string
+  price: number
+  ingredients: string[]
+  amount: number
+  image: string
+}
+
+export function CoffeeCard({
+  name,
+  description,
+  price,
+  image,
+  ingredients,
+}: CoffeeProps) {
+  const [itemPrice, setItemPrice] = useState(1)
+
+  function handleIncreaseAmount() {
+    if (itemPrice >= 9) {
+      return alert('O valor máximo são de nove cafés por pedido.')
+    }
+    setItemPrice((state) => {
+      return state + 1
+    })
+  }
+
+  function handleDecreaseAmount() {
+    if (itemPrice <= 1) {
+      return alert('O valor mínimo é de um café por pedido.')
+    }
+    setItemPrice((state) => {
+      return state - 1
+    })
+  }
+
   return (
     <CoffeeContainer>
-      <img src={CoffeeTradicional} alt="" className="imageCoffee" />
-      <span>Tradicional</span>
-      <h2>Expresso Tradicional</h2>
-      <p>O tradicional café feito com água quente e grãos moídos</p>
+      <img src={image} alt="" className="imageCoffee" />
+      <section>
+        {ingredients.map((item) => {
+          return <span key={item}>{item}</span>
+        })}
+      </section>
+
+      <h2>{name}</h2>
+      <p>{description}</p>
 
       <FooterCard>
         <div>
           <span>R$</span>
-          <strong>9,90</strong>
+          <strong>{price}</strong>
         </div>
 
         <div>
           <AmountContainer>
-            <button>
+            <button onClick={handleDecreaseAmount}>
               <Minus size={14} />
             </button>
-            <span>1</span>
-            <button>
+            <span>{itemPrice}</span>
+            <button onClick={handleIncreaseAmount}>
               <Plus size={14} />
             </button>
           </AmountContainer>

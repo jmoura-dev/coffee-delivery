@@ -14,7 +14,11 @@ export const MainContainer = styled.main`
   }
 `
 export const CardsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3.2rem;
+  > ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3.2rem;
+  }
 `

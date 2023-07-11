@@ -6,7 +6,8 @@ export const CoffeeContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-  max-width: 25.6rem;
+  min-width: 23rem;
+  max-width: 23.6rem;
   max-height: 31rem;
 
   border-radius: 0.8rem 3.8rem;
@@ -21,24 +22,30 @@ export const CoffeeContainer = styled.div`
     margin-bottom: 1rem;
   }
 
-  > span {
-    text-transform: uppercase;
-    color: ${({ theme }) => theme['yellow-dark']};
-    background: ${({ theme }) => theme['yellow-light']};
+  > section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
+    > span {
+      text-transform: uppercase;
+      color: ${({ theme }) => theme['yellow-dark']};
+      background: ${({ theme }) => theme['yellow-light']};
 
-    line-height: 1.3;
-    padding: 0.3rem 0.7rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+
+      line-height: 1.3;
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
   }
 
   h2 {
     font-family: 'Baloo 2', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     line-height: 1.3;
 
@@ -62,7 +69,7 @@ export const CoffeeContainer = styled.div`
 export const FooterCard = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
   margin: 1rem 0;
 
@@ -95,7 +102,7 @@ export const FooterCard = styled.div`
 
     > a {
       background: ${({ theme }) => theme['purple-dark']};
-      padding: 0.8rem;
+      padding: 0.7rem;
       border-radius: 0.6rem;
       display: flex;
       transition: background 0.2s;
@@ -114,7 +121,7 @@ export const AmountContainer = styled.div`
   border-radius: 0.6rem;
 
   background-color: ${({ theme }) => theme['base-button']};
-  padding: 0.8rem 1.2rem;
+  padding: 0.7rem 1rem;
 
   button {
     border: none;
