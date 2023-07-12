@@ -19,7 +19,8 @@ export const PaymentContainer = styled.div`
 
   main {
     display: grid;
-    grid-template-columns: 65% 1fr;
+    grid-template-columns: 57% 1fr;
+    gap: 3.2rem;
 
     h2 {
       font-size: 'Baloo 2', sans-serif;
@@ -31,55 +32,56 @@ export const PaymentContainer = styled.div`
       color: ${({ theme }) => theme['base-subtitle']};
     }
 
-    section footer {
-      background: ${({ theme }) => theme['base-card']};
-      padding: 4rem;
-      border-radius: 0.8rem;
-      margin-top: 1.3rem;
+    > section {
+      > footer {
+        background: ${({ theme }) => theme['base-card']};
+        padding: 4rem;
+        border-radius: 0.8rem;
+        margin-top: 1.3rem;
 
-      > div:first-child {
-        display: flex;
-        gap: 0.8rem;
-
-        p {
-          font-family: 'Roboto', sans-serif;
-          font-size: 1.6rem;
-          line-height: 1.3;
-          color: ${({ theme }) => theme['base-subtitle']};
-        }
-        span {
-          font-family: 'Roboto', sans-serif;
-          font-size: 1.4rem;
-          line-height: 1.3;
-          color: ${({ theme }) => theme['base-text']};
-        }
-      }
-
-      > div:last-child {
-        display: flex;
-        gap: 1.2rem;
-        margin-top: 3.2rem;
-
-        button {
-          height: 4.8rem;
+        > div:first-child {
           display: flex;
-          align-items: center;
-          justify-content: start;
-          padding-left: 1.4rem;
-          gap: 1.2rem;
-          border: none;
-          border-radius: 8px;
-          background: ${({ theme }) => theme['base-button']};
+          gap: 0.8rem;
 
-          font-family: 'Roboto', sans-serif;
-          font-size: 1.2rem;
-          line-height: 1.6;
-          text-transform: uppercase;
-          flex: 1;
+          p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.6rem;
+            line-height: 1.3;
+            color: ${({ theme }) => theme['base-subtitle']};
+          }
+          span {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.4rem;
+            line-height: 1.3;
+            color: ${({ theme }) => theme['base-text']};
+          }
         }
 
-        button:hover {
-          cursor: pointer;
+        > div:last-child {
+          display: flex;
+          gap: 1.2rem;
+          margin-top: 3.2rem;
+          justify-content: space-between;
+
+          button {
+            height: 4.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding-left: 1.4rem;
+            padding-right: 1.4rem;
+            gap: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: ${({ theme }) => theme['base-button']};
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+          }
+
+          button:hover {
+            cursor: pointer;
+          }
         }
       }
     }
@@ -87,7 +89,6 @@ export const PaymentContainer = styled.div`
 `
 
 export const FormContainer = styled.form`
-  max-width: 64rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -160,4 +161,63 @@ export const UfInput = styled(baseInput)`
   max-width: 6rem;
 `
 
-export const Details = styled.div``
+export const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  background: ${({ theme }) => theme['base-card']};
+  border-radius: 0.6rem 4.4rem;
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  > footer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 2.4rem;
+    gap: 1.2rem;
+
+    section {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        font-size: 1.4rem;
+        line-height: 1.3;
+        color: ${({ theme }) => theme['base-text']};
+      }
+
+      strong {
+        font-size: 2rem;
+        font-weight: bold;
+        line-height: 1.3;
+        color: ${({ theme }) => theme['base-subtitle']};
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 1.2rem 0.8rem;
+      border: none;
+      border-radius: 6px;
+      margin-top: 1.2rem;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+
+      background-color: ${({ theme }) => theme['yellow-base']};
+      color: ${({ theme }) => theme.white};
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: ${({ theme }) => theme['yellow-dark']};
+    }
+  }
+`

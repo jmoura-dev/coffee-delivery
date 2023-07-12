@@ -15,6 +15,7 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { PurchaseItems } from './components/PurchaseItems'
 
 export function Payment() {
   return (
@@ -88,7 +89,31 @@ export function Payment() {
 
         <section>
           <h2>Cafés selecionados</h2>
-          <Details></Details>
+          <Details>
+            <ul>
+              <PurchaseItems />
+              <PurchaseItems />
+            </ul>
+
+            <footer>
+              <section>
+                <span>Total de itens</span>
+                <span>R$ 29,70</span>
+              </section>
+
+              <section>
+                <span>Entrega</span>
+                <span>R$ 3,50</span>
+              </section>
+
+              <section>
+                <strong>Total</strong>
+                <strong>R$ 33,20</strong>
+              </section>
+
+              <button>Confirmar pedido</button>
+            </footer>
+          </Details>
         </section>
       </main>
     </PaymentContainer>
