@@ -19,15 +19,69 @@ export const PaymentContainer = styled.div`
 
   main {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 65% 1fr;
 
     h2 {
       font-size: 'Baloo 2', sans-serif;
       font-size: 1.8rem;
       font-weight: bold;
       line-height: 1.3;
+      margin-bottom: 1.6rem;
 
       color: ${({ theme }) => theme['base-subtitle']};
+    }
+
+    section footer {
+      background: ${({ theme }) => theme['base-card']};
+      padding: 4rem;
+      border-radius: 0.8rem;
+      margin-top: 1.3rem;
+
+      > div:first-child {
+        display: flex;
+        gap: 0.8rem;
+
+        p {
+          font-family: 'Roboto', sans-serif;
+          font-size: 1.6rem;
+          line-height: 1.3;
+          color: ${({ theme }) => theme['base-subtitle']};
+        }
+        span {
+          font-family: 'Roboto', sans-serif;
+          font-size: 1.4rem;
+          line-height: 1.3;
+          color: ${({ theme }) => theme['base-text']};
+        }
+      }
+
+      > div:last-child {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: 3.2rem;
+
+        button {
+          height: 4.8rem;
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          padding-left: 1.4rem;
+          gap: 1.2rem;
+          border: none;
+          border-radius: 8px;
+          background: ${({ theme }) => theme['base-button']};
+
+          font-family: 'Roboto', sans-serif;
+          font-size: 1.2rem;
+          line-height: 1.6;
+          text-transform: uppercase;
+          flex: 1;
+        }
+
+        button:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 `
@@ -38,6 +92,10 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+
+  background: ${({ theme }) => theme['base-card']};
+  padding: 4rem;
+  border-radius: 0.8rem;
 
   > div {
     display: flex;

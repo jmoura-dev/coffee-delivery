@@ -7,7 +7,14 @@ import {
   PlaceInput,
   UfInput,
 } from './styles'
-import { ArrowCircleLeft, MapPinLine } from 'phosphor-react'
+import {
+  ArrowCircleLeft,
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from 'phosphor-react'
 
 export function Payment() {
   return (
@@ -47,6 +54,36 @@ export function Payment() {
               <UfInput placeholder="UF" title="UF" />
             </section>
           </FormContainer>
+
+          <footer>
+            <div>
+              <CurrencyDollar size={22} color="#8047F8" />
+              <div>
+                <p>Pagamento</p>
+                <span>
+                  O pagamento é feito na entrega. Escolha a forma que deseja
+                  pagar
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <button>
+                <CreditCard size={16} color="#8047F8" />
+                CARTÃO DE CRÉDITO
+              </button>
+
+              <button>
+                <Bank size={16} color="#8047F8" />
+                CARTÃO DE DÉBITO
+              </button>
+
+              <button>
+                <Money size={16} color="#8047F8" />
+                DINHEIRO
+              </button>
+            </div>
+          </footer>
         </section>
 
         <section>
