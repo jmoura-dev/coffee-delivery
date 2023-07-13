@@ -4,13 +4,16 @@ import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/theme/default'
 import { Router } from './Routes'
 import { CoffeeContextProvider } from './contexts/CoffeeContext'
+import { FormContextProvider } from './contexts/FormContext'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <CoffeeContextProvider>
-          <Router />
+          <FormContextProvider>
+            <Router />
+          </FormContextProvider>
         </CoffeeContextProvider>
       </BrowserRouter>
       <GlobalStyle />

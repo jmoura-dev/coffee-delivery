@@ -15,12 +15,14 @@ interface CoffeeProps {
 }
 
 export function Home() {
-  const { arrayCoffee, setCoffeeCart } = useContext(CoffeeContext)
+  const { arrayAllCoffees, arrayCoffee, setArrayCoffee, setCoffeeCart } =
+    useContext(CoffeeContext)
 
   function handleAddNewCoffeeInCart(coffee: CoffeeProps) {
     setCoffeeCart((state) => {
       return [...state, coffee]
     })
+    setArrayCoffee(arrayAllCoffees)
   }
 
   return (

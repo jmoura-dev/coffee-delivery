@@ -1,16 +1,25 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { AboutContainer } from './styles'
+import { useContext } from 'react'
+import { FormContext } from '../../../../contexts/FormContext'
 
 export function About() {
+  const { userPurchase } = useContext(FormContext)
+
+  const { city, neighborhood, number, paymentType, street, uf } = userPurchase
+
   return (
     <AboutContainer>
       <section>
         <MapPin size={16} color="white" weight="fill" className="map" />
         <div>
           <p>
-            Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+            Entrega em{' '}
+            <strong>
+              {`Rua ${street}`}, {number}
+            </strong>
           </p>
-          <span>Farrapos - Porto Alegre, RS</span>
+          <span>{`${neighborhood} - ${city}, ${uf}`}</span>
         </div>
       </section>
 
@@ -31,7 +40,7 @@ export function About() {
         />
         <div>
           <p>Pagamento na entrega</p>
-          <strong>Cartão de Crédito</strong>
+          <strong>{paymentType}</strong>
         </div>
       </section>
     </AboutContainer>

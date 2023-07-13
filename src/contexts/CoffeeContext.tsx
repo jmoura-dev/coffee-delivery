@@ -26,8 +26,10 @@ interface ContextProps {
   coffeeCart: CoffeeProps[]
   setCoffeeCart: React.Dispatch<React.SetStateAction<CoffeeProps[]>>
   arrayCoffee: CoffeeProps[]
+  arrayAllCoffees: CoffeeProps[]
   handleIncreaseAmount: (id: string) => void
   handleDecreaseAmount: (id: string) => void
+  setArrayCoffee: React.Dispatch<React.SetStateAction<CoffeeProps[]>>
 }
 
 export const CoffeeContext = createContext({} as ContextProps)
@@ -191,8 +193,10 @@ export function CoffeeContextProvider({
         coffeeCart,
         setCoffeeCart,
         arrayCoffee,
+        arrayAllCoffees,
         handleIncreaseAmount,
         handleDecreaseAmount,
+        setArrayCoffee,
       }}
     >
       {children}

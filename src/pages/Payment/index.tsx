@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom'
-import { useContext } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { ChangeEvent, useContext, useState } from 'react'
 import {
   FormContainer,
   PaymentContainer,
@@ -18,9 +18,50 @@ import {
 } from 'phosphor-react'
 import { PurchaseItems } from './components/PurchaseItems'
 import { CoffeeContext } from '../../contexts/CoffeeContext'
+import { FormContext } from '../../contexts/FormContext'
 
 export function Payment() {
-  const { coffeeCart } = useContext(CoffeeContext)
+  const { coffeeCart, setCoffeeCart } = useContext(CoffeeContext)
+  const { setUserPurchase } = useContext(FormContext)
+
+  const [cep, setCep] = useState<string>('')
+  const [city, setCity] = useState<string>('')
+  const [neighborhood, setNeighborhood] = useState<string>('')
+  const [number, setNumber] = useState<string>('')
+  const [street, setStreet] = useState<string>('')
+  const [uf, setUf] = useState<string>('')
+  const [complement, setComplement] = useState<string>('')
+  const [paymentType, setPaymentType] = useState<string>('')
+
+  const navigate = useNavigate()
+
+  function onFinishBuy() {
+    if (!cep || !city || !neighborhood || !number || !street || !uf) {
+      return alert('Preencha todos os campos que são obrigatórios.')
+    }
+
+    if (!paymentType) {
+      return alert('Selecione o tipo de pagamento')
+    }
+
+    setUserPurchase({
+      cep,
+      city,
+      neighborhood,
+      number,
+      street,
+      uf,
+      complement,
+      paymentType,
+    })
+    navigate('/order')
+    setCoffeeCart([])
+  }
+
+  function handleSelectPaymentType(event: React.MouseEvent<HTMLButtonElement>) {
+    const value = event.currentTarget.value
+    setPaymentType(value)
+  }
 
   const arrayItems = coffeeCart.map((item) => {
     return item.amount * item.price
@@ -48,23 +89,62 @@ export function Payment() {
               </div>
             </div>
 
-            <GenericInput placeholder="CEP" title="CEP" />
+            <GenericInput
+              placeholder="CEP"
+              title="CEP"
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setCep(e.target.value)
+              }
+            />
 
-            <PlaceInput placeholder="Rua" title="RUA" />
+            <PlaceInput
+              placeholder="Rua"
+              title="RUA"
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setStreet(e.target.value)
+              }
+            />
 
             <section>
-              <GenericInput placeholder="Número" title="NÚMERO" />
+              <GenericInput
+                placeholder="Número"
+                title="NÚMERO"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setNumber(e.target.value)
+                }
+              />
 
               <PlaceInput
                 placeholder="Complemento  (opcional)"
                 title="COMPLEMENTO"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setComplement(e.target.value)
+                }
               />
             </section>
 
             <section>
-              <GenericInput placeholder="Bairro" title="Bairro" />
-              <PlaceInput placeholder="Cidade" title="cidade" />
-              <UfInput placeholder="UF" title="UF" />
+              <GenericInput
+                placeholder="Bairro"
+                title="Bairro"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setNeighborhood(e.target.value)
+                }
+              />
+              <PlaceInput
+                placeholder="Cidade"
+                title="cidade"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setCity(e.target.value)
+                }
+              />
+              <UfInput
+                placeholder="UF"
+                title="UF"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setUf(e.target.value)
+                }
+              />
             </section>
           </FormContainer>
 
@@ -81,17 +161,23 @@ export function Payment() {
             </div>
 
             <div>
-              <button value="credit">
+              <button
+                value="Cartão de Crédito"
+                onClick={handleSelectPaymentType}
+              >
                 <CreditCard size={16} color="#8047F8" />
                 CARTÃO DE CRÉDITO
               </button>
 
-              <button value="debit">
+              <button
+                value="Cartão de Débito"
+                onClick={handleSelectPaymentType}
+              >
                 <Bank size={16} color="#8047F8" />
                 CARTÃO DE DÉBITO
               </button>
 
-              <button value="money">
+              <button value="Dinheiro" onClick={handleSelectPaymentType}>
                 <Money size={16} color="#8047F8" />
                 DINHEIRO
               </button>
@@ -120,7 +206,7 @@ export function Payment() {
             <footer>
               <section>
                 <span>Total de itens</span>
-                <span>{`R$ ${totalItems}`}</span>
+                <span>{`R$ ${totalItems.toFixed(2)}`}</span>
               </section>
 
               <section>
@@ -133,7 +219,7 @@ export function Payment() {
                 <strong>{`R$ ${(totalItems + 3.5).toFixed(2)}`}</strong>
               </section>
 
-              <button>Confirmar pedido</button>
+              <button onClick={onFinishBuy}>Confirmar pedido</button>
             </footer>
           </Details>
         </section>
