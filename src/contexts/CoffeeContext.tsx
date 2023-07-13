@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from 'react'
+import { ReactNode, createContext, useState } from 'react'
 
 import Tradicional from '../assets/Expresso.svg'
 import Americano from '../assets/Americano.svg'
@@ -22,7 +22,15 @@ interface CoffeeProps {
   image: string
 }
 
-export const CoffeeContext = createContext({} as CoffeeProps[])
+interface ContextProps {
+  coffeeCart: CoffeeProps[]
+  setCoffeeCart: React.Dispatch<React.SetStateAction<CoffeeProps[]>>
+  arrayCoffee: CoffeeProps[]
+  handleIncreaseAmount: (id: string) => void
+  handleDecreaseAmount: (id: string) => void
+}
+
+export const CoffeeContext = createContext({} as ContextProps)
 
 interface CoffeeContextProviderProps {
   children: ReactNode
@@ -31,7 +39,7 @@ interface CoffeeContextProviderProps {
 export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
-  const ArrayCoffee: CoffeeProps[] = [
+  const arrayAllCoffees: CoffeeProps[] = [
     {
       id: '1',
       name: 'Expresso Tradicional',
@@ -136,9 +144,57 @@ export function CoffeeContextProvider({
       price: 11.99,
     },
   ]
+  const [coffeeCart, setCoffeeCart] = useState<CoffeeProps[]>([])
+  const [arrayCoffee, setArrayCoffee] = useState<CoffeeProps[]>(arrayAllCoffees)
+
+  function handleIncreaseAmount(id: string) {
+    setArrayCoffee((arrayAllCoffees) => {
+      return arrayAllCoffees.map((coffee) => {
+        if (coffee.id === id && coffee.amount >= 10) {
+          alert('Valor máximo de dez itens por pedido.')
+          return {
+            ...coffee,
+          }
+        } else if (coffee.id === id) {
+          return {
+            ...coffee,
+            amount: coffee.amount + 1,
+          }
+        }
+        return coffee
+      })
+    })
+  }
+
+  function handleDecreaseAmount(id: string) {
+    setArrayCoffee((arrayAllCoffees) => {
+      return arrayAllCoffees.map((coffee) => {
+        if (coffee.id === id && coffee.amount <= 1) {
+          alert('Valor mínimo de um item por pedido.')
+          return {
+            ...coffee,
+          }
+        } else if (coffee.id === id) {
+          return {
+            ...coffee,
+            amount: coffee.amount - 1,
+          }
+        }
+        return coffee
+      })
+    })
+  }
 
   return (
-    <CoffeeContext.Provider value={ArrayCoffee}>
+    <CoffeeContext.Provider
+      value={{
+        coffeeCart,
+        setCoffeeCart,
+        arrayCoffee,
+        handleIncreaseAmount,
+        handleDecreaseAmount,
+      }}
+    >
       {children}
     </CoffeeContext.Provider>
   )

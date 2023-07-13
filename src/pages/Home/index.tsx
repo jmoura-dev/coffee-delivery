@@ -2,10 +2,26 @@ import { useContext } from 'react'
 import { About } from './components/About'
 import { CardsContainer, HomeContainer, MainContainer } from './styles'
 import { CoffeeContext } from '../../contexts/CoffeeContext'
-import { CoffeeCard, CoffeeProps } from './components/CoffeeCard'
+import { CoffeeCard } from './components/CoffeeCard'
+
+interface CoffeeProps {
+  id: string
+  name: string
+  description: string
+  image: string
+  amount: number
+  ingredients: string[]
+  price: number
+}
 
 export function Home() {
-  const arrayCoffee: CoffeeProps[] = useContext(CoffeeContext)
+  const { arrayCoffee, setCoffeeCart } = useContext(CoffeeContext)
+
+  function handleAddNewCoffeeInCart(coffee: CoffeeProps) {
+    setCoffeeCart((state) => {
+      return [...state, coffee]
+    })
+  }
 
   return (
     <HomeContainer>
@@ -25,6 +41,7 @@ export function Home() {
                   ingredients={item.ingredients}
                   price={item.price}
                   id={item.id}
+                  onClick={() => handleAddNewCoffeeInCart(item)}
                 />
               )
             })}

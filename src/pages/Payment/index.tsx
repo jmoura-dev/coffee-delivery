@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
 import {
   FormContainer,
   PaymentContainer,
@@ -16,8 +17,11 @@ import {
   Money,
 } from 'phosphor-react'
 import { PurchaseItems } from './components/PurchaseItems'
+import { CoffeeContext } from '../../contexts/CoffeeContext'
 
 export function Payment() {
+  const { coffeeCart } = useContext(CoffeeContext)
+
   return (
     <PaymentContainer>
       <NavLink to="/">
@@ -91,8 +95,17 @@ export function Payment() {
           <h2>Cafés selecionados</h2>
           <Details>
             <ul>
-              <PurchaseItems />
-              <PurchaseItems />
+              {coffeeCart.map((item) => {
+                return (
+                  <PurchaseItems
+                    key={item.id}
+                    name={item.name}
+                    image={item.image}
+                    amount={item.amount}
+                    price={item.price}
+                  />
+                )
+              })}
             </ul>
 
             <footer>

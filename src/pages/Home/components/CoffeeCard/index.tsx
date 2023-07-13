@@ -1,9 +1,8 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { AmountContainer, CoffeeContainer, FooterCard } from './styles'
 
-// import CoffeeTradicional from '../../../../assets/Expresso.svg'
-import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext } from 'react'
+import { CoffeeContext } from '../../../../contexts/CoffeeContext'
 
 export interface CoffeeProps {
   id: string
@@ -13,34 +12,21 @@ export interface CoffeeProps {
   ingredients: string[]
   amount: number
   image: string
+  onClick: () => void
 }
 
 export function CoffeeCard({
+  id,
   name,
   description,
   price,
+  amount,
   image,
   ingredients,
+  onClick,
 }: CoffeeProps) {
-  const [itemPrice, setItemPrice] = useState(1)
-
-  function handleIncreaseAmount() {
-    if (itemPrice >= 9) {
-      return alert('O valor máximo são de nove cafés por pedido.')
-    }
-    setItemPrice((state) => {
-      return state + 1
-    })
-  }
-
-  function handleDecreaseAmount() {
-    if (itemPrice <= 1) {
-      return alert('O valor mínimo é de um café por pedido.')
-    }
-    setItemPrice((state) => {
-      return state - 1
-    })
-  }
+  const { handleIncreaseAmount, handleDecreaseAmount } =
+    useContext(CoffeeContext)
 
   return (
     <CoffeeContainer>
@@ -62,18 +48,18 @@ export function CoffeeCard({
 
         <div>
           <AmountContainer>
-            <button onClick={handleDecreaseAmount}>
+            <button onClick={() => handleDecreaseAmount(id)}>
               <Minus size={14} />
             </button>
-            <span>{itemPrice}</span>
-            <button onClick={handleIncreaseAmount}>
+            <span>{amount}</span>
+            <button onClick={() => handleIncreaseAmount(id)}>
               <Plus size={14} />
             </button>
           </AmountContainer>
 
-          <NavLink to="/payment">
+          <button onClick={onClick}>
             <ShoppingCart size={18} color="white" weight="fill" />
-          </NavLink>
+          </button>
         </div>
       </FooterCard>
     </CoffeeContainer>

@@ -100,14 +100,16 @@ export const FooterCard = styled.div`
     justify-content: center;
     gap: 0.8rem;
 
-    > a {
+    > button {
       background: ${({ theme }) => theme['purple-dark']};
       padding: 0.7rem;
       border-radius: 0.6rem;
       display: flex;
       transition: background 0.2s;
+      border: none;
 
       &:hover {
+        cursor: pointer;
         background: ${({ theme }) => theme['purple-base']};
       }
     }

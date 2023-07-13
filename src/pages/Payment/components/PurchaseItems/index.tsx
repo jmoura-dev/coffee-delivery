@@ -1,6 +1,5 @@
 import { ControlAmount, PurchaseItemsContainer } from './styles'
 
-import Image from '../../../../assets/Café-Gelado.svg'
 import { Minus, Plus, Trash } from 'phosphor-react'
 
 interface PurchaseItemsProps {
@@ -18,15 +17,15 @@ export function PurchaseItems({
 }: PurchaseItemsProps) {
   return (
     <PurchaseItemsContainer>
-      <img src={Image} alt="" />
+      <img src={image} alt="" />
       <section>
-        <strong>Expresso Tradicional</strong>
+        <strong>{name}</strong>
         <ControlAmount>
           <div>
             <button>
               <Minus size={14} />
             </button>
-            <span>1</span>
+            <span>{amount}</span>
             <button>
               <Plus size={14} />
             </button>
@@ -37,7 +36,7 @@ export function PurchaseItems({
           </button>
         </ControlAmount>
       </section>
-      <span>R$ 9,90</span>
+      <span>{`R$ ${price}`}</span>
     </PurchaseItemsContainer>
   )
 }
