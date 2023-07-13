@@ -87,5 +87,6 @@ export const ControlAmount = styled.div`
 
   > button:hover {
     cursor: pointer;
+    background: ${({ theme }) => theme['base-hover']};
   }
 `

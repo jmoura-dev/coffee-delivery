@@ -77,10 +77,17 @@ export const PaymentContainer = styled.div`
             font-family: 'Roboto', sans-serif;
             font-size: 1.2rem;
             text-transform: uppercase;
+
+            &:focus {
+              outline: 0;
+              box-shadow: 0 0 0 1px ${({ theme }) => theme['purple-base']};
+              background: ${({ theme }) => theme['purple-light']};
+            }
           }
 
           button:hover {
             cursor: pointer;
+            background: ${({ theme }) => theme['base-hover']};
           }
         }
       }

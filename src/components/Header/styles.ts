@@ -17,12 +17,31 @@ export const HeaderContainer = styled.header`
     gap: 1.5rem;
 
     a {
+      position: relative;
       background-color: ${({ theme }) => theme['yellow-light']};
       color: ${({ theme }) => theme['yellow-dark']};
       padding: 0.5rem 0.8rem;
 
       border-radius: 5px;
       border: none;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 1.8rem;
+        width: 1.8rem;
+        position: absolute;
+        top: -20%;
+        right: -20%;
+
+        background: ${({ theme }) => theme['yellow-dark']};
+        color: ${({ theme }) => theme.white};
+        border-radius: 50%;
+
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
 
       :hover {
         cursor: pointer;

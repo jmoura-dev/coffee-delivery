@@ -22,6 +22,14 @@ import { CoffeeContext } from '../../contexts/CoffeeContext'
 export function Payment() {
   const { coffeeCart } = useContext(CoffeeContext)
 
+  const arrayItems = coffeeCart.map((item) => {
+    return item.amount * item.price
+  })
+
+  const totalItems = arrayItems.reduce((acc, item) => {
+    return acc + item
+  }, 0)
+
   return (
     <PaymentContainer>
       <NavLink to="/">
@@ -73,17 +81,17 @@ export function Payment() {
             </div>
 
             <div>
-              <button>
+              <button value="credit">
                 <CreditCard size={16} color="#8047F8" />
                 CARTÃO DE CRÉDITO
               </button>
 
-              <button>
+              <button value="debit">
                 <Bank size={16} color="#8047F8" />
                 CARTÃO DE DÉBITO
               </button>
 
-              <button>
+              <button value="money">
                 <Money size={16} color="#8047F8" />
                 DINHEIRO
               </button>
@@ -99,10 +107,11 @@ export function Payment() {
                 return (
                   <PurchaseItems
                     key={item.id}
+                    id={item.id}
                     name={item.name}
                     image={item.image}
                     amount={item.amount}
-                    price={item.price}
+                    totalPrice={Number((item.price * item.amount).toFixed(2))}
                   />
                 )
               })}
@@ -111,7 +120,7 @@ export function Payment() {
             <footer>
               <section>
                 <span>Total de itens</span>
-                <span>R$ 29,70</span>
+                <span>{`R$ ${totalItems}`}</span>
               </section>
 
               <section>
@@ -121,7 +130,7 @@ export function Payment() {
 
               <section>
                 <strong>Total</strong>
-                <strong>R$ 33,20</strong>
+                <strong>{`R$ ${(totalItems + 3.5).toFixed(2)}`}</strong>
               </section>
 
               <button>Confirmar pedido</button>
