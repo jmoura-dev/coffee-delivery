@@ -19,7 +19,7 @@ export function Header() {
 
         <NavLink to="/payment" className="test" title="Finalizar compras">
           <ShoppingCart size={20} weight="fill" />
-          <span>{coffeeCart.length}</span>
+          {coffeeCart.length > 0 && <span>{coffeeCart.length}</span>}
         </NavLink>
       </div>
     </HeaderContainer>
